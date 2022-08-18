@@ -7,10 +7,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Role;
+use App\Models\Book;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function roles() {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function books() {
+        return $this->belongsToMany(Book::class);
+    }
 
     /**
      * The attributes that are mass assignable.
