@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Author;
-use App\Http\Requests\StoreAuthorRequest;
-use App\Http\Requests\UpdateAuthorRequest;
+use App\Models\Genre;
+use App\Http\Requests\StoreGenreRequest;
+use App\Http\Requests\UpdateGenreRequest;
 
-class AuthorController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreAuthorRequest  $request
+     * @param  \App\Http\Requests\StoreGenreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(StoreGenreRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function show(Author $author)
+    public function show(Genre $genre)
     {
         //
     }
@@ -53,10 +53,10 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function edit(Author $author)
+    public function edit(Genre $genre)
     {
         //
     }
@@ -64,11 +64,11 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAuthorRequest  $request
-     * @param  \App\Models\Author  $author
+     * @param  \App\Http\Requests\UpdateGenreRequest  $request
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAuthorRequest $request, Author $author)
+    public function update(UpdateGenreRequest $request, Genre $genre)
     {
         //
     }
@@ -76,10 +76,10 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Genre  $genre
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Author $author)
+    public function destroy(Genre $genre)
     {
         //
     }
