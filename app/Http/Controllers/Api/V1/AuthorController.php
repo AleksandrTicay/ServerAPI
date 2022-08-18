@@ -6,8 +6,12 @@ use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
 use App\Filters\V1\AuthorFilter;
+use Illuminate\Support\Arr;
+use App\Models\Book;
+use App\Http\Resources\V1\BookCollection;
 
 class AuthorController extends Controller
 {
@@ -22,9 +26,12 @@ class AuthorController extends Controller
         $queryItems = $filter->transform($request);
 
         if(count($queryItems) == 0) {
-            return new BookCollection(Book::where('amount', '>', 0)->paginate()); //Json response           
-        } else {
-            return new BookCollection(Book::where('amount', '>', 0)->where($queryItems)->paginate());
+            return;
+        } else {            
+            $author = Author::where($queryItems)->first();            
+            $result= $author->books;
+            $result[0]['author'] = $author->name;
+            return new BookCollection($result);                        
         }
     }
 

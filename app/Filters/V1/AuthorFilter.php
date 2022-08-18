@@ -8,11 +8,13 @@ use App\Filters\ApiFilter;
 class AuthorFilter extends ApiFilter {
 
     protected $parms = [
-        'name' => ['eq']            
+        'name' => ['lk']            
     ];
 
     protected $operatorMap = [
-        'eq' => '='
-    ];    
+        'lk' => 'like'
+    ];
+
+    
 
 }

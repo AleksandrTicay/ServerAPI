@@ -22,7 +22,7 @@ class ApiFilter {
 
             foreach ($operators as $operator) {
                 if(isset($query[$operator])) {
-                    $eloQuery[] = [$parm, $this->operatorMap[$operator],$query[$operator]];
+                    $eloQuery[] = [$parm, $this->operatorMap[$operator],'%' . $query[$operator] . '%'];
                 }
             }
 
