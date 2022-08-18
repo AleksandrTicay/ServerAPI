@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Filters\V1\AuthorFilter;
 
 class AuthorController extends Controller
 {
@@ -14,9 +16,16 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = new AuthorFilter();
+        $queryItems = $filter->transform($request);
+
+        if(count($queryItems) == 0) {
+            return new BookCollection(Book::where('amount', '>', 0)->paginate()); //Json response           
+        } else {
+            return new BookCollection(Book::where('amount', '>', 0)->where($queryItems)->paginate());
+        }
     }
 
     /**

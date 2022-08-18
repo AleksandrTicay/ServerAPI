@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\Book;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\V1\BookResource;
+use App\Http\Resources\V1\BookCollection;
+use App\Filters\V1\BooksFilter;
+
 
 class BookController extends Controller
 {
@@ -14,9 +19,18 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return Book::where('amount', '>', 0);
+    public function index(Request $request)
+    {                
+        $filter = new BooksFilter();
+        $queryItems = $filter->transform($request);
+
+        if(count($queryItems) == 0) {
+            return new BookCollection(Book::where('amount', '>', 0)->paginate());            
+        } else {
+            return new BookCollection(Book::where('amount', '>', 0)->where($queryItems)->paginate());
+        }
+
+        
     }
 
     /**
@@ -48,7 +62,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return new BookResource($book);
     }
 
     /**
