@@ -26,12 +26,17 @@ class AuthorController extends Controller
         $queryItems = $filter->transform($request);
 
         if(count($queryItems) == 0) {
-            return;
+            return response()->json([
+                'msg' => '404 Query not found'
+            ]);
         } else {            
-            $author = Author::where($queryItems)->first();            
-            $result= $author->books;
-            $result[0]['author'] = $author->name;
-            return new BookCollection($result);                        
+            $author = Author::where($queryItems)->first();
+            $books= $author->books;         
+                        
+            foreach($books as $key => $book) {
+                $book['author'] = $author->name;                
+            }            
+            return new BookCollection($books); 
         }
     }
 

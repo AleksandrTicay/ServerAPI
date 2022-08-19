@@ -6,6 +6,10 @@ use App\Models\Genre;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Http\Controllers\Controller;
+use App\Filters\V1\GenreFilter;
+use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Http\Resources\V1\BookCollection;
 
 class GenreController extends Controller
 {
@@ -14,9 +18,26 @@ class GenreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = new GenreFilter();
+        $queryItems = $filter->transform($request);
+
+        if(count($queryItems) == 0) {
+            return response()->json([
+                'msg' => '404 Query not found'
+            ]);          
+        } else {
+
+            $genre = Genre::where($queryItems)->first();
+            $books= $genre->books;         
+                        
+            foreach($books as $key => $book) {
+                $book['genre'] = $genre->name;
+            }            
+            return new BookCollection($books); 
+        }
+
     }
 
     /**

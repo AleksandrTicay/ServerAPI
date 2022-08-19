@@ -5,10 +5,10 @@ namespace App\Filters\V1;
 use Illuminate\Http\Request;
 use App\Filters\ApiFilter;
 
-class BooksFilter extends ApiFilter {
+class GenreFilter extends ApiFilter {
 
     protected $parms = [
-        'title' => ['lk']            
+        'name' => ['lk']            
     ];
 
     protected $operatorMap = [
