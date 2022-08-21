@@ -54,7 +54,7 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        $books = Book::where('genre_id', $genre->id)->with('authors')->get();
+        $books = $genre->books;
 
         if(count($books) > 0) {
             return new BookCollection($books);  

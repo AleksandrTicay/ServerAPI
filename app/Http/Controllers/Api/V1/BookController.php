@@ -29,7 +29,7 @@ class BookController extends Controller
 
         if(count($filterItems) == 0) {
 
-            $result = new BookCollection(Book::where('amount', '>', 0)->with('genre')->with('authors')->paginate()); 
+            $result = new BookCollection(Book::where('amount', '>', 0)->with('genres')->with('authors')->paginate()); 
             if(count($result) > 0) {
                 return $result;
             } else {

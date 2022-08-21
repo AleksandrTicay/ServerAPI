@@ -18,8 +18,8 @@ class Book extends Model
         'published_year'
     ];
 
-    public function genre() {
-        return $this->belongsTo(Genre::class);
+    public function genres() {
+        return $this->belongsToMany(Genre::class, 'book_genre')->withTimestamps();
     }
 
     public function authors() {

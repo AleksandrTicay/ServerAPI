@@ -21,7 +21,7 @@ class BookResource extends JsonResource
             'title' => $this->title,
             'publishedYear' => $this->published_year,
             'amount' => $this->amount,  
-            'genre' => new GenreResource($this->genre),
+            'genres' => GenreResource::collection($this->genres),
             'authors' => AuthorResource::collection($this->authors)
         ];
     }

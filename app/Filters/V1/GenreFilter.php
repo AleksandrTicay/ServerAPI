@@ -8,11 +8,11 @@ use App\Filters\ApiFilter;
 class GenreFilter extends ApiFilter {
 
     protected $parms = [
-        'id' => ['eq']            
+        'name' => ['lk']            
     ];
 
     protected $operatorMap = [
-        'eq' => '='
+        'lk' => 'LIKE'
     ];    
 
 }
