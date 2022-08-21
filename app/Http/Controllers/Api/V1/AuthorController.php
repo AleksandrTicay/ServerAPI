@@ -30,7 +30,7 @@ class AuthorController extends Controller
                 'msg' => '404 Query not found'
             ]);
         } else {            
-            $author = Author::where($queryItems)->first();
+            $author = Author::where($queryItems)->get();
             $books= $author->books;         
                         
             foreach($books as $key => $book) {
