@@ -24,7 +24,15 @@ class StoreBookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required'],
+            'amount' => ['required'],
+            'publishedYear' => ['required'],
         ];
+    }
+
+    protected function prepareForValidation() {
+        $this->merge([
+            'published_year' => $this->publishedYear
+        ]);
     }
 }

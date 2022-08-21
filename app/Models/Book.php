@@ -12,12 +12,18 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'amount',
+        'published_year'
+    ];
+
     public function genre() {
         return $this->belongsTo(Genre::class);
     }
 
     public function authors() {
-        return $this->belongsToMany(Author::class, 'book_author');
+        return $this->belongsToMany(Author::class, 'book_author')->withTimestamps();
     }
 
     public function users() {

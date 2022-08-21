@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Genre;
-use App\Http\Requests\StoreGenreRequest;
-use App\Http\Requests\UpdateGenreRequest;
+use App\Http\Requests\V1\StoreGenreRequest;
+use App\Http\Requests\V1\UpdateGenreRequest;
 use App\Http\Controllers\Controller;
 use App\Filters\V1\GenreFilter;
 use Illuminate\Http\Request;

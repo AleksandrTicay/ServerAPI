@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Book;
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
+use App\Models\Author;
+use App\Models\Genre;
+use App\Http\Requests\V1\StoreBookRequest;
+use App\Http\Requests\V1\UpdateBookRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\BookResource;
@@ -55,7 +57,26 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        $genre = Genre::firstOrCreate([
+            'name' => $request->genre
+        ]);
+
+        $book = $genre->books()->create([
+            'title' => $request->title,
+            'amount' => $request->amount,
+            'published_year' => $request->published_year,
+        ]);
+
+        $authors = explode(',', $request->authors);
+        foreach( $authors as $author) {
+            $singleAuthor = Author::firstOrCreate([
+                'name' => $author
+            ]);
+
+            $book->authors()->attach($singleAuthor);
+        }   
+        
+        return new BookResource($book);
     }
 
     /**
