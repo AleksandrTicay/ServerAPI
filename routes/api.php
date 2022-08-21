@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function() {
     Route::apiResource('books', BookController::class);
-    Route::apiResource('genre', GenreController::class);
-    Route::apiResource('author', AuthorController::class);
+    Route::apiResource('genres', GenreController::class);
+    Route::apiResource('authors', AuthorController::class);
 });
 
 Route::post('/register',[AuthController::class,'register']);
