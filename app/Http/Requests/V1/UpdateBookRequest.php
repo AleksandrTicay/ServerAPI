@@ -13,7 +13,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,28 @@ class UpdateBookRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT') {
+            return [
+                'title' => 'required|min:5',
+                'amount' => 'required|min:1',
+                'publishedYear' => ['required'],
+            ];
+        }else {
+            return [
+                'title' => 'sometimes','required|min:5',
+                'amount' => 'sometimes','required|min:1',
+                'publishedYear' => ['sometimes','required'],
+            ];
+        }        
+    }
+
+    protected function prepareForValidation() {
+        if($this->published_year){
+            $this->merge([
+                'published_year' => $this->publishedYear
+            ]);
+        }        
     }
 }

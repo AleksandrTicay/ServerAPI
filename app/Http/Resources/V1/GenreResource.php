@@ -14,7 +14,8 @@ class GenreResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [              
+        return [   
+            'id' =>$this->id,          
             'name' => $this->name            
         ];
     }

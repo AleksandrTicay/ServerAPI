@@ -25,26 +25,7 @@ class GenreController extends Controller
         return new GenreCollection(Genre::all());         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGenreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreGenreRequest $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -63,29 +44,6 @@ class GenreController extends Controller
                 'msg' => 'No books were found for that genre'
             ]); 
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Genre  $genre
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Genre $genre)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGenreRequest  $request
-     * @param  \App\Models\Genre  $genre
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGenreRequest $request, Genre $genre)
-    {
-        //
     }
 
     /**

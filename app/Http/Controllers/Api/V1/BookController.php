@@ -57,15 +57,26 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $genre = Genre::firstOrCreate([
-            'name' => $request->genre
-        ]);
-
-        $book = $genre->books()->create([
+        if(count($request->all()) > 0) {
+            return response()->json([
+                'msg' => 'One of the arguments is empty'
+            ]); 
+        }
+        
+        $book = Book::create([
             'title' => $request->title,
             'amount' => $request->amount,
             'published_year' => $request->published_year,
         ]);
+
+        $genres = explode(',', $request->genres);
+        foreach( $genres as $genre) {
+            $singleGenre = Genre::firstOrCreate([
+                'name' => $genre
+            ]);
+
+            $book->genres()->attach($singleGenre);
+        }   
 
         $authors = explode(',', $request->authors);
         foreach( $authors as $author) {
@@ -76,7 +87,9 @@ class BookController extends Controller
             $book->authors()->attach($singleAuthor);
         }   
         
-        return new BookResource($book);
+        return response()->json([
+            'msg' => 'One of the arguments is empty'
+        ]); 
     }
 
     /**
@@ -99,7 +112,7 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
     }
 
     /**

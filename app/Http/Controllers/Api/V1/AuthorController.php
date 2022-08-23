@@ -12,6 +12,7 @@ use App\Filters\V1\AuthorFilter;
 use Illuminate\Support\Arr;
 use App\Models\Book;
 use App\Http\Resources\V1\BookCollection;
+use App\Http\Resources\V1\BookResource;
 
 class AuthorController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthorController extends Controller
                 'msg' => '404 Query not found'
             ]);
         } else {            
-            $author = Author::where($queryItems)->get();
+            $author = Author::where($queryItems)->first();
             $books= $author->books;         
                         
             foreach($books as $key => $book) {
