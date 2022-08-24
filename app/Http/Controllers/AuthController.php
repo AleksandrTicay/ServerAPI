@@ -16,7 +16,8 @@ class AuthController extends Controller
                 'firstname'=>'required|string',
                 'lastname'=>'required|string',
                 'email'=>'required|string|email',
-                'password'=>'required|min:8'
+                'password'=>'required|min:8',
+                'role_id' => 'required'
         ]);
  
             $user = User::create([
@@ -24,7 +25,7 @@ class AuthController extends Controller
             'lastname' => $post_data['lastname'],
             'email' => $post_data['email'],
             'password' => Hash::make($post_data['password']),
-            'role_id' => 1,
+            'role_id' => $post_data['role_id']
             
             ]);
  
@@ -45,8 +46,11 @@ class AuthController extends Controller
  
         $user = User::where('email', $request['email'])->firstOrFail();
                 $token = $user->createToken('authToken')->plainTextToken;
- 
+                
+
             return response()->json([
+                'user' => $user->firstname,
+                'role' => $user->role->name,     
             'access_token' => $token,
             'token_type' => 'Bearer',
             ]);

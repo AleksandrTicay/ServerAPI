@@ -88,7 +88,7 @@ class BookController extends Controller
         }   
         
         return response()->json([
-            'msg' => 'One of the arguments is empty'
+            'msg' => 'The book was added successfully'
         ]); 
     }
 
